@@ -23,7 +23,6 @@
 			    var deferred = new jQuery.Deferred();
 			    $.ajax({
 			        url: 'http://json.bubblemix.net/ws/EPoap', // mock web service that returns a url template
-			        dataType: 'jsonp',
 			        success: function(response) {
 			            // Resolve the defered to return the URL
 					    var url = response.url
