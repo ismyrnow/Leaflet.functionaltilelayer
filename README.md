@@ -44,7 +44,7 @@ For an example of the code above, see the [basic example]
 
 A more useful example, which demonstrates the deferred functionality, can be 
 seen [here]
-(http://ismyrnow.github.com/Leaflet.functionaltilelayer/example/deferred.html).
+(http://jsfiddle.net/ismyrnow/LbSpp/).
 
 Because your URL is defined by a function, you can use it to show different 
 tile sets at different levels, or for different bounding boxes.
