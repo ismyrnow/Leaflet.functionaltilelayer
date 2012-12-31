@@ -4,6 +4,9 @@ Leaflet.functionaltilelayer
 Leaflet tile layer with functionally defined URL and support for jQuery 
 deferreds.
 
+A typical use case is fetching tiles asynchronously, with an ajax request or 
+IndexedDB query.
+
 *Does not require jQuery, unless you are using the deferred functionality*
 
 ## Usage
@@ -45,9 +48,6 @@ For an example of the code above, see the [basic example]
 A more useful example, which demonstrates the deferred functionality, can be 
 seen [here]
 (http://jsfiddle.net/ismyrnow/LbSpp/).
-
-Because your URL is defined by a function, you can use it to show different 
-tile sets at different levels, or for different bounding boxes.
 
 ## Thanks
 
