@@ -3,7 +3,7 @@ L.TileLayer.Functional = L.TileLayer.extend({
   _tileFunction: null,
 
   initialize: function (tileFunction, options) {
-    _tileFunction = tileFunction;
+    this._tileFunction = tileFunction;
     L.Util.setOptions(this, options);
   },
 
@@ -30,7 +30,7 @@ L.TileLayer.Functional = L.TileLayer.extend({
           subdomain: this._getSubdomain(tilePoint)
         };
 
-    return _tileFunction(view);
+    return this._tileFunction(view);
   },
 
   _loadTile: function (tile, tilePoint) {
