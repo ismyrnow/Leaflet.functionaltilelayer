@@ -1,18 +1,15 @@
 Leaflet.functionaltilelayer
 ===========================
 
-Leaflet tile layer with functionally defined URL and support for jQuery 
-deferreds.
+Leaflet tile layer with functionally defined URL and support for promises.
 
 A typical use case is fetching tiles asynchronously, with an ajax request or 
 IndexedDB query.
 
-*Does not require jQuery, unless you are using the deferred functionality*
-
 ## Usage
 Use it like any other tile layer, but instead of providing a `urlTemplate` as 
 the first argument, provide a function. The function should return either the 
-tile URL as a string, or a deferred object which resolves to a string.
+tile URL as a string, or a promise which resolves to a string.
 
 ```javascript
 var funcLayer = new L.TileLayer.Functional(function (view) {
@@ -45,9 +42,8 @@ view = {
 For an example of the code above, see the [basic example]
 (http://ismyrnow.github.com/Leaflet.functionaltilelayer/example/basic.html).
 
-A more useful example, which demonstrates the deferred functionality, can be 
-seen [here]
-(http://jsfiddle.net/ismyrnow/LbSpp/).
+For an example of using promises, see the [promise example]
+(http://ismyrnow.github.com/Leaflet.functionaltilelayer/example/promise.html).
 
 ## Thanks
 

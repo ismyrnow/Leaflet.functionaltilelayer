@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Promise example</title>
+
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" /><![endif]-->
+	<script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script src="../src/leaflet.functionaltilelayer.js"></script>
+</head>
+<body>
+
+	<div id="map" style="position:absolute;width:80%;height:50%;"></div>
+
+	<script type="text/javascript">
+
+		(function() {
+
+			var funcLayer = new L.TileLayer.Functional(function (view) {
+				var deferred = $.Deferred();
+				var url = 'http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{y}/{x}.jpg'
+					.replace('{z}', view.zoom)
+					.replace('{x}', view.tile.row)
+					.replace('{y}', view.tile.column)
+					.replace('{s}', view.subdomain);
+					
+				setTimeout(function() {
+					deferred.resolve(url);
+				}, 500);
+				
+				return deferred.promise();
+			}, {
+				subdomains: '1234'
+			});
+
+			var map = new L.Map('map', { center: new L.LatLng(42.3584308, -71.0597732), zoom: 15, layers: [funcLayer] });
+
+		}());
+
+	</script>
+</body>
+</html>

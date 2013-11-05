@@ -42,9 +42,9 @@ L.TileLayer.Functional = L.TileLayer.extend({
 
     if (typeof tileUrl === "string") {
       tile.src = tileUrl;
-    } else if (tileUrl) {
-      // assume jQuery.Deferred
-      tileUrl.done(function (tileUrl) {
+    } else if (typeof tileUrl.then === "function") {
+      // Assume we are dealing with a promise.
+      tileUrl.then(function (tileUrl) {
         tile.src = tileUrl;
       });
     }
