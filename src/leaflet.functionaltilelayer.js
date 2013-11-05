@@ -41,12 +41,20 @@ L.TileLayer.Functional = L.TileLayer.extend({
     this._adjustTilePoint(tilePoint);
     var tileUrl = this.getTileUrl(tilePoint);
 
-    if (typeof tileUrl === "string") {
+    if (typeof tileUrl === 'string') {
       tile.src = tileUrl;
-    } else if (typeof tileUrl.then === "function") {
+      this.fire('tileloadstart', {
+        tile: tile,
+        url: tile.src
+      });
+    } else if (typeof tileUrl.then === 'function') {
       // Assume we are dealing with a promise.
       tileUrl.then(function (tileUrl) {
         tile.src = tileUrl;
+        this.fire('tileloadstart', {
+          tile: tile,
+          url: tile.src
+        });
       });
     }
   }
