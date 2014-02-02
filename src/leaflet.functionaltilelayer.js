@@ -4,7 +4,7 @@ L.TileLayer.Functional = L.TileLayer.extend({
 
   initialize: function (tileFunction, options) {
     this._tileFunction = tileFunction;
-    L.Util.setOptions(this, options);
+    L.TileLayer.prototype.initialize.call(this, null, options);
   },
 
   getTileUrl: function (tilePoint) {
