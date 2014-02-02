@@ -49,9 +49,10 @@ L.TileLayer.Functional = L.TileLayer.extend({
       });
     } else if (typeof tileUrl.then === 'function') {
       // Assume we are dealing with a promise.
+      var self = this;
       tileUrl.then(function (tileUrl) {
         tile.src = tileUrl;
-        this.fire('tileloadstart', {
+        self.fire('tileloadstart', {
           tile: tile,
           url: tile.src
         });
