@@ -27,6 +27,7 @@ The function is given a view object with the following properties:
 
 ```javascript
 view = {
+  retina,
   bbox,
   width,
   height,

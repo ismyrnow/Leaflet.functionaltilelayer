@@ -7,12 +7,12 @@ L.TileLayer.Functional = L.TileLayer.extend({
     L.TileLayer.prototype.initialize.call(this, null, options);
   },
 
-  getTileUrl: function (tilePoint) {
+  getTileUrl: function (coords) {
     var map = this._map,
       crs = map.options.crs,
       tileSize = this.options.tileSize,
-      zoom = tilePoint.z,
-      nwPoint = tilePoint.multiplyBy(tileSize),
+      zoom = this._getZoomForUrl(),
+      nwPoint = coords.multiplyBy(tileSize),
       sePoint = nwPoint.add(new L.Point(tileSize, tileSize)),
       nw = crs.project(map.unproject(nwPoint, zoom)),
       se = crs.project(map.unproject(sePoint, zoom)),
@@ -20,45 +20,47 @@ L.TileLayer.Functional = L.TileLayer.extend({
 
     // Setup object to send to tile function.
     var view = {
+      retina: this.options.detectRetina && L.Browser.retina && this.options.maxZoom > 0,
       bbox: bbox,
       width: tileSize,
       height: tileSize,
       zoom: zoom,
       tile: {
-        row: this.options.tms ? this._tileNumBounds.max.y - tilePoint.y : tilePoint.y,
-        column: tilePoint.x
+        row: this.options.tms ? this._tileNumBounds.max.y - coords.y : coords.y,
+        column: coords.x
       },
-      subdomain: this._getSubdomain(tilePoint)
+      subdomain: this._getSubdomain(coords)
     };
 
     return this._tileFunction(view);
   },
 
-  _loadTile: function (tile, tilePoint) {
-    tile._layer = this;
-    tile.onload = this._tileOnLoad;
-    tile.onerror = this._tileOnError;
+  createTile: function (coords, done) {
+    var tile = document.createElement('img');
+    var url = this.getTileUrl(coords);
 
-    this._adjustTilePoint(tilePoint);
-    var tileUrl = this.getTileUrl(tilePoint);
+    if (typeof url === 'string') {
 
-    if (typeof tileUrl === 'string') {
-      tile.src = tileUrl;
-      this.fire('tileloadstart', {
-        tile: tile,
-        url: tile.src
-      });
-    } else if (typeof tileUrl.then === 'function') {
+      // Regular tile url.
+      tile.onload = L.bind(this._tileOnLoad, this, done, tile);
+      tile.onerror = L.bind(this._tileOnError, this, done, tile);
+      tile.src = url;
+
+    } else if (typeof url.then === 'function') {
+
       // Assume we are dealing with a promise.
+      var promise = url;
       var self = this;
-      tileUrl.then(function (tileUrl) {
-        tile.src = tileUrl;
-        self.fire('tileloadstart', {
-          tile: tile,
-          url: tile.src
-        });
+      promise.then(function (url) {
+        tile.src = url;
+        done(null, tile);
+      }, function (err) {
+        done(err, tile);
       });
+
     }
+
+    return tile;
   }
 });
 
