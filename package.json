@@ -1,0 +1,9 @@
+{
+  "name": "leaflet.functionaltilelayer",
+  "version": "0.0.0",
+  "description": "Leaflet tile layer with functionally defined URL and support for promises.",
+  "keywords": ["leaflet"],
+  "main": "src/leaflet.functionaltilelayer.js",
+  "author": "Ishmael Smyrnow",
+  "license": "MIT"
+}
