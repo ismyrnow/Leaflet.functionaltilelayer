@@ -48,13 +48,7 @@ For an example of the code above, see the [basic example]
 For an example of using promises, see the [promise example]
 (example/promise.html).
 
-## Typescript
-
-Brings a very basic Typescript-Definition. Feel free to improve and create a pull-Request.
-
 ## Thanks
-
-Thanks to @ismyrnow for original version. See [ismyrnow/Leaflet.functionaltilelayer](https://github.com/ismyrnow/Leaflet.functionaltilelayer)
 
 Thanks to @ryanttb and [jQuery Geo](http://jquerygeo.com/)'s service objects, 
 which were the inspiration for this plugin.
