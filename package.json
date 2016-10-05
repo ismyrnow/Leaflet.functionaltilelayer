@@ -5,7 +5,8 @@
   "keywords": [
     "leaflet"
   ],
-  "main": "src/leaflet.functionaltilelayer.js",
+  "main": "./src/leaflet.functionaltilelayer.js",
+  "types": "./src/leaflet.functionaltilelayer.d.ts",
   "author": "Ishmael Smyrnow",
   "license": "MIT",
   "dependencies": {
