@@ -21,7 +21,3 @@ declare namespace L {
     }
   }
 }
-
-declare module 'leaflet.functionaltilelayer' {
-	export = L;
-}
