@@ -34,13 +34,23 @@ L.TileLayer.Functional = L.TileLayer.extend({
     return this._tileFunction(view);
   },
 
-  _loadTile: function (tile, tilePoint) {
-    tile._layer = this;
-    tile.onload = this._tileOnLoad;
-    tile.onerror = this._tileOnError;
+  createTile: function (coords, done) {
+    var tile = document.createElement('img');
 
-    this._adjustTilePoint(tilePoint);
-    var tileUrl = this.getTileUrl(tilePoint);
+		L.DomEvent.on(tile, 'load', L.bind(this._tileOnLoad, this, done, tile));
+		L.DomEvent.on(tile, 'error', L.bind(this._tileOnError, this, done, tile));
+
+		if (this.options.crossOrigin) {
+			tile.crossOrigin = '';
+		}
+
+		/*
+		 Alt tag is set to empty string to keep screen readers from reading URL and for compliance reasons
+		 http://www.w3.org/TR/WCAG20-TECHS/H67
+		*/
+		tile.alt = '';
+
+    var tileUrl = this.getTileUrl(coords);
 
     if (typeof tileUrl === 'string') {
       tile.src = tileUrl;
@@ -59,6 +69,8 @@ L.TileLayer.Functional = L.TileLayer.extend({
         });
       });
     }
+
+		return tile;
   }
 });
 
