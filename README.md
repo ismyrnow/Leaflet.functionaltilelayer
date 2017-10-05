@@ -1,6 +1,8 @@
 Leaflet.functionaltilelayer
 ===========================
 
+For use with Leaflet 1.0.1.
+
 Leaflet tile layer with functionally defined URL and support for promises.
 
 A typical use case is fetching tiles asynchronously, with an ajax request or 
@@ -9,18 +11,19 @@ IndexedDB query.
 > This project is looking for a maintainer. Interested? Open an issue.
 
 ## Usage
-Use it like any other tile layer, but instead of providing a `urlTemplate` as 
-the first argument, provide a function. The function should return either the 
+
+Use it like any other tile layer, but instead of providing a `urlTemplate` as
+the first argument, provide a function. The function should return either the
 tile URL as a string, or a promise which resolves to a string.
 
 ```javascript
 var funcLayer = new L.TileLayer.Functional(function (view) {
-    var url = 'http://otile{3}.mqcdn.com/tiles/1.0.0/map/{0}/{1}/{2}.jpg'
-        .replace('{0}', view.zoom)
-        .replace('{1}', view.tile.row)
-        .replace('{2}', view.tile.column)
-        .replace('{3}', view.subdomain);
-    
+      var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+        .replace('{z}', view.zoom)
+        .replace('{y}', view.tile.row)
+        .replace('{x}', view.tile.column)
+        .replace('{s}', view.subdomain);
+
     return url;
 });
 ```
@@ -42,10 +45,10 @@ view = {
 ```
 
 For an example of the code above, see the [basic example]
-(http://ismyrnow.github.com/Leaflet.functionaltilelayer/example/basic.html).
+(example/basic.html).
 
 For an example of using promises, see the [promise example]
-(http://ismyrnow.github.com/Leaflet.functionaltilelayer/example/promise.html).
+(example/promise.html).
 
 ## Thanks
 

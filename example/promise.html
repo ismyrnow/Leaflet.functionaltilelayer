@@ -3,8 +3,8 @@
 <head>
   <title>Promise example</title>
 
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
-  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,26 +13,26 @@
 <body>
 
 	<p>Tiles are rendered using promises and after a delay of 1-3 seconds.</p>
-	
+
   <div id="map" style="position:absolute;width:80%;height:50%;"></div>
 
   <script type="text/javascript">
 
     var funcLayer = new L.TileLayer.Functional(function (view) {
       var deferred = $.Deferred();
-      var url = 'http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{y}/{x}.jpg'
+      var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
         .replace('{z}', view.zoom)
-        .replace('{x}', view.tile.row)
-        .replace('{y}', view.tile.column)
+        .replace('{y}', view.tile.row)
+        .replace('{x}', view.tile.column)
         .replace('{s}', view.subdomain);
-        
+
       setTimeout(function() {
         deferred.resolve(url);
       }, randomIntFromInterval(1000, 3000));
-      
+
       return deferred.promise();
     }, {
-      subdomains: '1234'
+      subdomains: 'abc'
     });
 
     var map = new L.Map('map', { center: new L.LatLng(42.3584308, -71.0597732), zoom: 15, layers: [funcLayer] });
