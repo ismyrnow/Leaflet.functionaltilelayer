@@ -6,7 +6,7 @@ Leaflet tile layer with functionally defined URL and support for promises.
 A typical use case is fetching tiles asynchronously, with an ajax request or 
 IndexedDB query.
 
-> This project is looking for a maintainer. Interested? Contact me on Twitter: [@ismyrnow](https://twitter.com/ismyrnow).
+> This project is looking for a maintainer. Interested? Open an issue.
 
 ## Usage
 Use it like any other tile layer, but instead of providing a `urlTemplate` as 
